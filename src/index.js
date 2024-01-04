@@ -13,16 +13,16 @@ const setupAndStartServer = () => {
     app.listen(PORT, () => {
         console.log("Server successfully started at PORT: ", PORT);
 
-        sendBasicEmail(
-            '"Support" <support@admin.com>',
-            'b210055@nitsikkim.ac.in',
-            'This is a testing email',
-            'We hope that you will love our service'
-        );
+        // sendBasicEmail(
+        //     '"Support" <support@admin.com>',
+        //     'b210055@nitsikkim.ac.in',
+        //     'This is a testing email',
+        //     'We hope that you will love our service'
+        // );
 
-        cron.schedule('*/2 * * * *',() => {
-            console.log('running a task every two minutes');
-        })
+        // cron.schedule('*/2 * * * *',() => {
+        //     console.log('running a task every two minutes');
+        // })
 
     });
 }
