@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { PORT } = require('./config/serverConfig');
+const { PORT, REMINDER_BINDING_KEY } = require('./config/serverConfig');
 
 const TicketController = require('./controllers/ticket-controller');
 const jobs = require('./utils/job');
 
-const { createChannel } = require('./utils/messageQueue');
+const { subscribeMessage, createChannel } = require('./utils/messageQueue');
 
 const setupAndStartServer = async () => {
     const app = express();
@@ -15,6 +15,9 @@ const setupAndStartServer = async () => {
     // const channel = await createChannel();
 
     app.post('/api/v1/tickets',TicketController.create); 
+
+    const channel = await createChannel();
+    subscribeMessage(channel, undefined, REMINDER_BINDING_KEY);
 
     app.listen(PORT, () => {
         console.log("Server successfully started at PORT: ", PORT);
